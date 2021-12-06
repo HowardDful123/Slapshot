@@ -5,9 +5,9 @@ using UnityEngine;
 public class CameraManipulation : MonoBehaviour
 {
     public Transform LookAtPosition = null;
-    public Transform smallViewCam = null;
-    public SceneNode head = null;
-    public float zoomSensitivity = 5f;
+    // public Transform smallViewCam = null;
+    // public SceneNode head = null;
+    public float zoomSensitivity = 5f, panSensitivity = 0.5f;
     private Vector3 originMouse;
     Quaternion originalLookAt;
 
@@ -24,7 +24,7 @@ public class CameraManipulation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        smallViewCam.localPosition = head.MCombinedParentXform.GetColumn(3);
+        /*smallViewCam.localPosition = head.MCombinedParentXform.GetColumn(3);
         Vector3 y = head.MCombinedParentXform.GetColumn(1);
         Vector3 z = head.MCombinedParentXform.GetColumn(2);
         y.Normalize();
@@ -36,7 +36,7 @@ public class CameraManipulation : MonoBehaviour
         // Now, align forward
         angle = Mathf.Acos(Vector3.Dot(smallViewCam.forward, y)) * Mathf.Rad2Deg;
         axis = Vector3.Cross(smallViewCam.forward, y);
-        smallViewCam.localRotation = Quaternion.AngleAxis(angle, axis) * smallViewCam.localRotation;
+        smallViewCam.localRotation = Quaternion.AngleAxis(angle, axis) * smallViewCam.localRotation;*/
 
         // Viewing vector is from transform.localPosition to the lookat position
         Vector3 V = LookAtPosition.localPosition - transform.localPosition;
@@ -101,8 +101,8 @@ public class CameraManipulation : MonoBehaviour
         LookAtPosition.position += delta;
         transform.position += delta;*/
 
-        float dx = Input.GetAxis("Mouse X") * 1.5f;
-        float dy = Input.GetAxis("Mouse Y") * 1.5f;
+        float dx = Input.GetAxis("Mouse X") * panSensitivity;
+        float dy = Input.GetAxis("Mouse Y") * panSensitivity;
 
         // First, align up
         float angle = Mathf.Acos(Vector3.Dot(Vector3.up, transform.up)) * Mathf.Rad2Deg;
