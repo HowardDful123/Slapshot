@@ -7,7 +7,7 @@ public class SceneNode : MonoBehaviour
 
     private Matrix4x4 mCombinedParentXform;
     private Matrix4x4 originalXform;
-    private Transform axisFrame;
+    //private Transform axisFrame;
     private Quaternion originRotation;
 
     public Vector3 NodeOrigin = Vector3.zero;
@@ -22,7 +22,7 @@ public class SceneNode : MonoBehaviour
     {
         InitializeSceneNode();
         // Debug.Log("PrimitiveList:" + PrimitiveList.Count);
-        axisFrame = GameObject.Find("AxisFrame").GetComponent<Transform>();
+        //axisFrame = GameObject.Find("AxisFrame").GetComponent<Transform>();
         originRotation = transform.localRotation;
         originalXform = mCombinedParentXform;
     }
@@ -30,7 +30,7 @@ public class SceneNode : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isSelected) 
+        /*if (isSelected) 
         {
             axisFrame.localPosition = MCombinedParentXform.GetColumn(3);
             Vector3 x = MCombinedParentXform.GetColumn(0);
@@ -53,7 +53,7 @@ public class SceneNode : MonoBehaviour
             angle = Mathf.Acos(Vector3.Dot(axisFrame.forward, z)) * Mathf.Rad2Deg;
             axis = Vector3.Cross(axisFrame.forward, z);
             axisFrame.localRotation = Quaternion.AngleAxis(angle, axis) * axisFrame.localRotation;
-        }
+        }*/
         
     }
 
