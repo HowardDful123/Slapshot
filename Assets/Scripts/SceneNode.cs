@@ -13,6 +13,8 @@ public class SceneNode : MonoBehaviour
     public Vector3 NodeOrigin = Vector3.zero;
     public List<NodePrimitive> PrimitiveList;
     public bool isSelected = false;
+    public float moveSen = 0.5f, rotateSen = 0.5f;
+
 
     public Matrix4x4 MCombinedParentXform { get => mCombinedParentXform; set => mCombinedParentXform = value; }
 
@@ -30,31 +32,40 @@ public class SceneNode : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*if (isSelected) 
+        if (isSelected)
         {
-            axisFrame.localPosition = MCombinedParentXform.GetColumn(3);
-            Vector3 x = MCombinedParentXform.GetColumn(0);
-            Vector3 y = MCombinedParentXform.GetColumn(1);
-            Vector3 z = MCombinedParentXform.GetColumn(2);
-            Vector3 size = new Vector3(x.magnitude, y.magnitude, z.magnitude);
-            axisFrame.localScale = size;
+            if (Input.GetKey(KeyCode.E))
+            {
+                Quaternion turn = Quaternion.AngleAxis(rotateSen, transform.right);
 
+                transform.localRotation = turn * transform.localRotation;
+            }
+            else if (Input.GetKey(KeyCode.Q))
+            {
+                Quaternion turn = Quaternion.AngleAxis(-rotateSen, transform.right);
 
-            // Align rotation
-            // WorldTransform.localRotation = Quaternion.LookRotation(z / size.z, y / size.y);
-            // OR
-            y.Normalize();
-            z.Normalize();
-            // First, align up
-            float angle = Mathf.Acos(Vector3.Dot(Vector3.up, y)) * Mathf.Rad2Deg;
-            Vector3 axis = Vector3.Cross(Vector3.up, y);
-            axisFrame.localRotation = Quaternion.AngleAxis(angle, axis);
-            // Now, align forward
-            angle = Mathf.Acos(Vector3.Dot(axisFrame.forward, z)) * Mathf.Rad2Deg;
-            axis = Vector3.Cross(axisFrame.forward, z);
-            axisFrame.localRotation = Quaternion.AngleAxis(angle, axis) * axisFrame.localRotation;
-        }*/
-        
+                transform.localRotation = turn * transform.localRotation;
+            }
+
+            if (Input.GetKey(KeyCode.W)) 
+            {
+                transform.localPosition += Vector3.forward * moveSen;
+            }
+            else if (Input.GetKey(KeyCode.S))
+            {
+                transform.localPosition += -Vector3.forward * moveSen;
+            }
+            else if (Input.GetKey(KeyCode.A))
+            {
+                transform.localPosition += -Vector3.right * moveSen;
+            }
+            else if (Input.GetKey(KeyCode.D))
+            {
+                transform.localPosition += Vector3.right * moveSen;
+            }
+
+        }
+
     }
 
     private void InitializeSceneNode()
