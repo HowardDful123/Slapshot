@@ -1,25 +1,17 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-
 public class SceneNode : MonoBehaviour
 {
-
     private Matrix4x4 mCombinedParentXform;
     private Matrix4x4 originalXform;
     //private Transform axisFrame;
     private Quaternion originRotation;
-
     public Vector3 NodeOrigin = Vector3.zero;
     public List<NodePrimitive> PrimitiveList;
     public bool isSelected = false;
     public float moveSen = 0.5f, rotateSen = 0.5f;
-
-
     public Matrix4x4 MCombinedParentXform { get => mCombinedParentXform; set => mCombinedParentXform = value; }
-
-
-    // Use this for initialization
     protected void Start()
     {
         InitializeSceneNode();
@@ -28,42 +20,47 @@ public class SceneNode : MonoBehaviour
         originRotation = transform.localRotation;
         originalXform = mCombinedParentXform;
     }
-
-    // Update is called once per frame
     void Update()
     {
         if (isSelected)
         {
+            float rotateSenTemp = 0f;
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                rotateSenTemp = rotateSen / 2f;
+            }
+            else rotateSenTemp = rotateSen;
             if (Input.GetKey(KeyCode.E))
             {
-                Quaternion turn = Quaternion.AngleAxis(rotateSen, transform.right);
-
+                Quaternion turn = Quaternion.AngleAxis(rotateSenTemp, transform.right);
                 transform.localRotation = turn * transform.localRotation;
             }
             else if (Input.GetKey(KeyCode.Q))
             {
-                Quaternion turn = Quaternion.AngleAxis(-rotateSen, transform.right);
-
+                Quaternion turn = Quaternion.AngleAxis(-rotateSenTemp, transform.right);
                 transform.localRotation = turn * transform.localRotation;
             }
 
-            if (Input.GetKey(KeyCode.W)) 
+            if (Input.GetKeyDown(KeyCode.W)) 
             {
                 transform.localPosition += Vector3.forward * moveSen;
             }
-            else if (Input.GetKey(KeyCode.S))
+            else if (Input.GetKeyDown(KeyCode.S))
             {
                 transform.localPosition += -Vector3.forward * moveSen;
             }
-            else if (Input.GetKey(KeyCode.A))
+            else if (Input.GetKeyDown(KeyCode.A))
             {
                 transform.localPosition += -Vector3.right * moveSen;
             }
-            else if (Input.GetKey(KeyCode.D))
+            else if (Input.GetKeyDown(KeyCode.D))
             {
                 transform.localPosition += Vector3.right * moveSen;
             }
-
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                resetTransform();
+            }
         }
 
     }
@@ -72,7 +69,6 @@ public class SceneNode : MonoBehaviour
     {
         MCombinedParentXform = Matrix4x4.identity;
     }
-
     public void resetTransform() 
     {
         transform.localPosition = originalXform.GetColumn(3);

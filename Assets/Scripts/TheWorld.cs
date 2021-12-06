@@ -10,7 +10,6 @@ public class TheWorld : MonoBehaviour
         Matrix4x4 i = Matrix4x4.identity;
         TheRoot.CompositeXform(ref i);
     }
-
     public void resetAllTransform()
     {
         TheRoot.resetTransform();
