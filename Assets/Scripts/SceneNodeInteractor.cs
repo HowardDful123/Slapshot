@@ -5,6 +5,7 @@ public class SceneNodeInteractor : MonoBehaviour
 {
     public GameObject parentSN;
     public Vector3 relativePosition;
+    public int forceMagnitude;
     void Start()
     {
         parentSN.transform.GetComponent<SceneNode>().MCombinedParentXform.MultiplyPoint3x4(transform.localPosition);
@@ -16,6 +17,5 @@ public class SceneNodeInteractor : MonoBehaviour
         Vector3 parentPos = parentSN.transform.GetComponent<SceneNode>().MCombinedParentXform.GetColumn(3);
         Vector3 newPos = parentPos + relativePosition;
         transform.SetPositionAndRotation(newPos, newRotation);
-        //transform.localPosition = newPos;
     }
 }

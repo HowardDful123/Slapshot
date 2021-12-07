@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class NodePrimitive : MonoBehaviour
 {
     public Color MyColor = new Color(0.1f, 0.1f, 0.2f, 1.0f);
