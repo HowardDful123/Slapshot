@@ -10,7 +10,7 @@ public class SceneNode : MonoBehaviour
     public Vector3 NodeOrigin = Vector3.zero;
     public List<NodePrimitive> PrimitiveList;
     public bool isSelected = false;
-    public float moveSen = 0.5f, rotateSen = 0.5f;
+    public float moveSen = 0.5f, rotateSen = 0.5f, maxAngle = 45f;
     public Matrix4x4 MCombinedParentXform { get => mCombinedParentXform; set => mCombinedParentXform = value; }
     protected void Start()
     {
@@ -30,36 +30,18 @@ public class SceneNode : MonoBehaviour
                 rotateSenTemp = rotateSen / 2f;
             }
             else rotateSenTemp = rotateSen;
-            if (Input.GetKey(KeyCode.E))
-            {
-                Quaternion turn = Quaternion.AngleAxis(rotateSenTemp, transform.right);
-                transform.localRotation = turn * transform.localRotation;
-            }
-            else if (Input.GetKey(KeyCode.Q))
-            {
-                Quaternion turn = Quaternion.AngleAxis(-rotateSenTemp, transform.right);
-                transform.localRotation = turn * transform.localRotation;
-            }
 
-            if (Input.GetKeyDown(KeyCode.W)) 
+            if (transform.tag == "Leg")
             {
-                transform.localPosition += Vector3.forward * moveSen;
+                LegManipulation(rotateSenTemp);
             }
-            else if (Input.GetKeyDown(KeyCode.S))
+            else if (transform.tag == "Torso") 
             {
-                transform.localPosition += -Vector3.forward * moveSen;
+                TorsoManipulation(rotateSenTemp);
             }
-            else if (Input.GetKeyDown(KeyCode.A))
+            else if (transform.tag == "Arm")
             {
-                transform.localPosition += -Vector3.right * moveSen;
-            }
-            else if (Input.GetKeyDown(KeyCode.D))
-            {
-                transform.localPosition += Vector3.right * moveSen;
-            }
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                resetTransform();
+                ArmManipulation(rotateSenTemp);
             }
         }
 
@@ -115,5 +97,101 @@ public class SceneNode : MonoBehaviour
         {
             p.LoadShaderMatrix(ref mCombinedParentXform);
         }
+    }
+
+    void LegManipulation(float tempSen) 
+    {
+        if (Input.GetKey(KeyCode.E))
+        {
+            Quaternion turn = Quaternion.AngleAxis(tempSen, Vector3.up);
+            transform.localRotation = turn * transform.localRotation;
+        }
+        else if (Input.GetKey(KeyCode.Q))
+        {
+            Quaternion turn = Quaternion.AngleAxis(-tempSen, Vector3.up);
+            transform.localRotation = turn * transform.localRotation;
+        }
+
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            transform.localPosition += Vector3.forward * moveSen;
+        }
+        else if (Input.GetKeyDown(KeyCode.S))
+        {
+            transform.localPosition += -Vector3.forward * moveSen;
+        }
+        else if (Input.GetKeyDown(KeyCode.A))
+        {
+            transform.localPosition += -Vector3.right * moveSen;
+        }
+        else if (Input.GetKeyDown(KeyCode.D))
+        {
+            transform.localPosition += Vector3.right * moveSen;
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            resetTransform();
+        }
+    }
+
+    void TorsoManipulation(float tempSen) 
+    {
+        if (Input.GetKey(KeyCode.D))
+        {
+            Quaternion turn = Quaternion.AngleAxis(tempSen, Vector3.up);
+            transform.localRotation = turn * transform.localRotation;
+        }
+        else if (Input.GetKey(KeyCode.A))
+        {
+            Quaternion turn = Quaternion.AngleAxis(-tempSen, Vector3.up);
+            transform.localRotation = turn * transform.localRotation;
+        }
+        else if (Input.GetKey(KeyCode.W))
+        {
+            Quaternion turn = Quaternion.AngleAxis(tempSen, transform.right);
+            transform.localRotation = turn * transform.localRotation;
+        }
+        else if (Input.GetKey(KeyCode.S))
+        {
+            Quaternion turn = Quaternion.AngleAxis(-tempSen, transform.right);
+            transform.localRotation = turn * transform.localRotation;
+        }
+    }
+
+    void ArmManipulation(float tempSen) 
+    {
+        Quaternion temp;
+        if (Input.GetKey(KeyCode.D))
+        {
+            Quaternion turn = Quaternion.AngleAxis(tempSen, Vector3.up);
+            temp = turn * transform.localRotation;
+            transform.localRotation = turn * transform.localRotation;
+        }
+        else if (Input.GetKey(KeyCode.A))
+        {
+            Quaternion turn = Quaternion.AngleAxis(-tempSen, Vector3.up);
+            transform.localRotation = turn * transform.localRotation;
+        }
+        else if (Input.GetKey(KeyCode.W))
+        {
+            Quaternion turn = Quaternion.AngleAxis(tempSen, transform.right);
+            transform.localRotation = turn * transform.localRotation;
+        }
+        else if (Input.GetKey(KeyCode.S))
+        {
+            Quaternion turn = Quaternion.AngleAxis(-tempSen, transform.right);
+            transform.localRotation = turn * transform.localRotation;
+        }
+        else if (Input.GetKey(KeyCode.Q))
+        {
+            Quaternion turn = Quaternion.AngleAxis(tempSen, transform.forward);
+            transform.localRotation = turn * transform.localRotation;
+        }
+        else if (Input.GetKey(KeyCode.E))
+        {
+            Quaternion turn = Quaternion.AngleAxis(-tempSen, transform.forward);
+            transform.localRotation = turn * transform.localRotation;
+        }
+
     }
 }
