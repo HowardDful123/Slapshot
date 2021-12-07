@@ -676,7 +676,7 @@ GameObject:
   - component: {fileID: 278197662}
   m_Layer: 0
   m_Name: Torso
-  m_TagString: Untagged
+  m_TagString: Torso
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -715,6 +715,7 @@ MonoBehaviour:
   isSelected: 0
   moveSen: 0.5
   rotateSen: 1
+  maxAngle: 45
 --- !u!114 &283755393 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114106389129077176, guid: ad840f8f9173c9048bc68985cf364a53, type: 3}
@@ -1070,7 +1071,7 @@ GameObject:
   - component: {fileID: 625304847}
   m_Layer: 0
   m_Name: Arms
-  m_TagString: Untagged
+  m_TagString: Arm
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1108,6 +1109,7 @@ MonoBehaviour:
   isSelected: 0
   moveSen: 0.5
   rotateSen: 1
+  maxAngle: 20
 --- !u!21 &659187968
 Material:
   serializedVersion: 6
@@ -8781,7 +8783,7 @@ GameObject:
   - component: {fileID: 910202037283430857}
   m_Layer: 0
   m_Name: player
-  m_TagString: Untagged
+  m_TagString: Leg
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8804,6 +8806,7 @@ MonoBehaviour:
   isSelected: 0
   moveSen: 0.5
   rotateSen: 0.5
+  maxAngle: 45
 --- !u!23 &1534333262622071367
 MeshRenderer:
   m_ObjectHideFlags: 0
