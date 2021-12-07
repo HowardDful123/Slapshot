@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class CameraManipulation : MonoBehaviour
 {
     public Transform LookAtPosition = null;
@@ -10,18 +9,13 @@ public class CameraManipulation : MonoBehaviour
     public float zoomSensitivity = 5f, panSensitivity = 0.5f;
     private Vector3 originMouse;
     Quaternion originalLookAt;
-
     Vector3 originalLocation;
-
-    // Start is called before the first frame update
     void Start()
     {
         originMouse = Input.mousePosition;
         originalLookAt = LookAtPosition.localRotation;
         originalLocation = transform.localPosition;
     }
-
-    // Update is called once per frame
     void Update()
     {
         /*smallViewCam.localPosition = head.MCombinedParentXform.GetColumn(3);
@@ -62,12 +56,9 @@ public class CameraManipulation : MonoBehaviour
             {
                 Panning();
             }
-
             Zoom();
-            
         }
     }
-
     void Tumble() 
     {
         // orbit with respect to the transform.right and transform.up axis
@@ -93,7 +84,6 @@ public class CameraManipulation : MonoBehaviour
             
         }*/
     }
-
     void Panning() 
     {
         /*Vector3 delta = originMouse - Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -120,13 +110,11 @@ public class CameraManipulation : MonoBehaviour
         transform.localPosition += transform.up * dy;
         LookAtPosition.localRotation = originalLookAt;
     }
-
     void Zoom() 
     {
         float delta = Input.GetAxis("Mouse ScrollWheel") * zoomSensitivity;
         transform.localPosition += transform.forward * delta;
     }
-
     public void resetToOrg() 
     {
         LookAtPosition.position = new Vector3(0, 0, 0);
