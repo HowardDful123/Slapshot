@@ -10,7 +10,7 @@ public class SceneNode : MonoBehaviour
     public Vector3 NodeOrigin = Vector3.zero;
     public List<NodePrimitive> PrimitiveList;
     public bool isSelected = false;
-    public float moveSen = 0.5f, rotateSen = 0.5f, maxAngle = 45f;
+    public float moveSen = 0.5f, rotateSen, maxAngle = 45f;
     public Matrix4x4 MCombinedParentXform { get => mCombinedParentXform; set => mCombinedParentXform = value; }
     protected void Start()
     {
@@ -25,17 +25,19 @@ public class SceneNode : MonoBehaviour
         if (isSelected)
         {
             float rotateSenTemp = 0f;
+            float moveSenTemp = 0f;
             if (Input.GetKey(KeyCode.LeftShift))
             {
-                rotateSenTemp = rotateSen / 2f;
+                rotateSenTemp = (rotateSen / 2f) * Time.fixedDeltaTime;
+                moveSenTemp = (moveSen / 2f);
             }
-            else rotateSenTemp = rotateSen;
+            else { rotateSenTemp = rotateSen * Time.fixedDeltaTime; moveSenTemp = moveSen; }
 
             if (transform.tag == "Leg")
             {
-                LegManipulation(rotateSenTemp);
+                LegManipulation(rotateSenTemp, moveSenTemp);
             }
-            else if (transform.tag == "Torso") 
+            else if (transform.tag == "Torso")
             {
                 TorsoManipulation(rotateSenTemp);
             }
@@ -44,14 +46,13 @@ public class SceneNode : MonoBehaviour
                 ArmManipulation(rotateSenTemp);
             }
         }
-
     }
 
     private void InitializeSceneNode()
     {
         MCombinedParentXform = Matrix4x4.identity;
     }
-    public void resetTransform() 
+    public void resetTransform()
     {
         transform.localPosition = originalXform.GetColumn(3);
         Vector3 x = originalXform.GetColumn(0);
@@ -72,6 +73,10 @@ public class SceneNode : MonoBehaviour
                 cn.resetTransform();
             }
         }
+    }
+    public void ResetPosition()
+    {
+        transform.localPosition = originalXform.GetColumn(3);
     }
 
     // This must be called _BEFORE_ each draw!! 
@@ -99,34 +104,34 @@ public class SceneNode : MonoBehaviour
         }
     }
 
-    void LegManipulation(float tempSen) 
+    void LegManipulation(float tempRSen, float tempMSen)
     {
         if (Input.GetKey(KeyCode.E))
         {
-            Quaternion turn = Quaternion.AngleAxis(tempSen, Vector3.up);
+            Quaternion turn = Quaternion.AngleAxis(tempRSen, Vector3.up);
             transform.localRotation = turn * transform.localRotation;
         }
         else if (Input.GetKey(KeyCode.Q))
         {
-            Quaternion turn = Quaternion.AngleAxis(-tempSen, Vector3.up);
+            Quaternion turn = Quaternion.AngleAxis(-tempRSen, Vector3.up);
             transform.localRotation = turn * transform.localRotation;
         }
 
         if (Input.GetKeyDown(KeyCode.W))
         {
-            transform.localPosition += Vector3.forward * moveSen;
+            transform.localPosition += Vector3.forward * tempMSen;
         }
         else if (Input.GetKeyDown(KeyCode.S))
         {
-            transform.localPosition += -Vector3.forward * moveSen;
+            transform.localPosition += -Vector3.forward * tempMSen;
         }
         else if (Input.GetKeyDown(KeyCode.A))
         {
-            transform.localPosition += -Vector3.right * moveSen;
+            transform.localPosition += -Vector3.right * tempMSen;
         }
         else if (Input.GetKeyDown(KeyCode.D))
         {
-            transform.localPosition += Vector3.right * moveSen;
+            transform.localPosition += Vector3.right * tempMSen;
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
@@ -134,7 +139,7 @@ public class SceneNode : MonoBehaviour
         }
     }
 
-    void TorsoManipulation(float tempSen) 
+    void TorsoManipulation(float tempSen)
     {
         if (Input.GetKey(KeyCode.D))
         {
@@ -158,7 +163,7 @@ public class SceneNode : MonoBehaviour
         }
     }
 
-    void ArmManipulation(float tempSen) 
+    void ArmManipulation(float tempSen)
     {
         Quaternion temp;
         if (Input.GetKey(KeyCode.D))
