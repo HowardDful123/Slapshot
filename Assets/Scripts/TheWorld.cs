@@ -11,6 +11,7 @@ public class TheWorld : MonoBehaviour
     private UnityEvent _goalScored;
     public int slapshotsAttempted, goalsScored;
     public Text shotAttempts, goals;
+    public GameObject slapshotAnimationPrefab;
     private void Start()
     {
         _puck = GameObject.Find("Puck").GetComponent<Puck>();
@@ -41,5 +42,9 @@ public class TheWorld : MonoBehaviour
         goalsScored++;
         TheRoot.ResetPosition();
         _puck.ResetPuck();
+    }
+    public void ShowSlapshotAnimation()
+    {
+        GameObject.Instantiate(slapshotAnimationPrefab, GameObject.Find("Slapshot_Button").transform);
     }
 }
