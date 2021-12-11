@@ -242,6 +242,7 @@ MonoBehaviour:
   shotAttempts: {fileID: 2018347924}
   goals: {fileID: 1981029414}
   slapshotAnimationPrefab: {fileID: 9088565891723026425, guid: 5bba0dfa84fc3a24fa34410f823008b7, type: 3}
+  stickTip: {fileID: 1836446129}
 --- !u!4 &50488904
 Transform:
   m_ObjectHideFlags: 0
@@ -6988,7 +6989,7 @@ MonoBehaviour:
   - {fileID: 8490619687593449326}
   isSelected: 0
   moveSen: 0.5
-  rotateSen: 10
+  rotateSen: 15
   maxAngle: 45
 --- !u!1 &283194174
 GameObject:
@@ -13970,7 +13971,7 @@ MonoBehaviour:
   - {fileID: 4858258060945620011}
   isSelected: 0
   moveSen: 0.5
-  rotateSen: 10
+  rotateSen: 15
   maxAngle: 20
 --- !u!21 &659187968
 Material:
@@ -27288,7 +27289,7 @@ MonoBehaviour:
   - {fileID: 6033121396993125152}
   isSelected: 0
   moveSen: 0.5
-  rotateSen: 10
+  rotateSen: 15
   maxAngle: 45
 --- !u!23 &1534333262622071367
 MeshRenderer:
