@@ -7,6 +7,7 @@ TagManager:
   - Leg
   - Torso
   - Arm
+  - StickCollider
   layers:
   - Default
   - TransparentFX

@@ -28,7 +28,7 @@ public class Puck : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name == "StickCollider")
+        if (other.gameObject.tag == "StickCollider")
         {
             slapshot = true;
             _rigidBody.AddForce(other.transform.forward * power);
