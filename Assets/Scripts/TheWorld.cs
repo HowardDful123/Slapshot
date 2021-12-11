@@ -41,7 +41,7 @@ public class TheWorld : MonoBehaviour
     {
         goalsScored++;
         TheRoot.ResetPosition();
-        _puck.ResetPuck();
+        _puck.ResetPuckRandom();
     }
     public void ShowSlapshotAnimation()
     {
@@ -56,14 +56,16 @@ public class TheWorld : MonoBehaviour
     IEnumerator Rotate(float num)
     {
         stickTip.transform.tag = "StickCollider";
+        Quaternion temp = TheArm.transform.localRotation;
         float t = 0;
         while (t < num)
         {
             t += Time.deltaTime;
-            Quaternion turn = Quaternion.AngleAxis(-5, TheArm.transform.right);
+            Quaternion turn = Quaternion.AngleAxis(-3, TheArm.transform.right);
             TheArm.transform.localRotation = turn * TheArm.transform.localRotation;
             yield return null;
         }
+        TheArm.transform.localRotation = temp;
         stickTip.transform.tag = "Untagged";
     }
 }
