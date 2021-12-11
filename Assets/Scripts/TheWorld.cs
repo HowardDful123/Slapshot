@@ -6,12 +6,12 @@ using UnityEngine.UI;
 public class TheWorld : MonoBehaviour
 {
     private Puck _puck;
-    public SceneNode TheRoot;
+    public SceneNode TheRoot, TheArm;
     public CameraManipulation cam;
     private UnityEvent _goalScored;
     public int slapshotsAttempted, goalsScored;
     public Text shotAttempts, goals;
-    public GameObject slapshotAnimationPrefab;
+    public GameObject slapshotAnimationPrefab, stickTip;
     private void Start()
     {
         _puck = GameObject.Find("Puck").GetComponent<Puck>();
@@ -46,5 +46,24 @@ public class TheWorld : MonoBehaviour
     public void ShowSlapshotAnimation()
     {
         GameObject.Instantiate(slapshotAnimationPrefab, GameObject.Find("Slapshot_Button").transform);
+    }
+
+    public void SlapShot() 
+    {
+        StartCoroutine(Rotate(0.5f));
+    }
+
+    IEnumerator Rotate(float num)
+    {
+        stickTip.transform.tag = "StickCollider";
+        float t = 0;
+        while (t < num)
+        {
+            t += Time.deltaTime;
+            Quaternion turn = Quaternion.AngleAxis(-5, TheArm.transform.right);
+            TheArm.transform.localRotation = turn * TheArm.transform.localRotation;
+            yield return null;
+        }
+        stickTip.transform.tag = "Untagged";
     }
 }
