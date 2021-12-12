@@ -8,6 +8,7 @@ TagManager:
   - Torso
   - Arm
   - StickCollider
+  - Obstacle
   layers:
   - Default
   - TransparentFX
