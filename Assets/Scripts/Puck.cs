@@ -41,6 +41,11 @@ public class Puck : MonoBehaviour
             _rigidBody.AddForce(other.transform.forward * power);
             _theWorld.SlapshotAttempted();
         }
+        else if (other.gameObject.name == "Obstacle")
+        {
+            _theWorld.SlapshotAttempted();
+            ResetPuckRandom();
+        }
         else if (other.gameObject.name == "GoalCollider")
         {
             _theWorld.ScoreGoal();
