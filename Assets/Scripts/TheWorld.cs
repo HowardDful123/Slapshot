@@ -56,16 +56,16 @@ public class TheWorld : MonoBehaviour
     IEnumerator Rotate(float num)
     {
         stickTip.transform.tag = "StickCollider";
-        Quaternion temp = TheArm.transform.localRotation;
+        
         float t = 0;
         while (t < num)
         {
             t += Time.deltaTime;
-            Quaternion turn = Quaternion.AngleAxis(-3, TheArm.transform.right);
+            Quaternion turn = Quaternion.AngleAxis(-3, Vector3.right);
             TheArm.transform.localRotation = turn * TheArm.transform.localRotation;
             yield return null;
         }
-        TheArm.transform.localRotation = temp;
+        
         stickTip.transform.tag = "Untagged";
     }
 }
