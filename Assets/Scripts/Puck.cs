@@ -22,16 +22,10 @@ public class Puck : MonoBehaviour
     void Update()
     {
         _puckTimeFrame.SetActive(slapshot);
-        if (slapshot)
-        {
-            _keepInBound.enabled = false;
-            Vector3 newPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-            if (newPos.y < 0.03f) newPos.y = 0.03f;
-            transform.position = newPos;
-        }
-        //if (slapshot) _keepInBound.enabled = false;
+        if (slapshot) _keepInBound.enabled = false;
         else _keepInBound.enabled = true;
         if (slapshot && _rigidBody.velocity.magnitude <= float.Epsilon) ResetPuckRandom();
+        if (transform.position.y < 10f) ResetPuckRandom();
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -73,7 +67,7 @@ public class Puck : MonoBehaviour
     {
         slapshot = false;
         _positionStart.y = 0.05f;
-        transform.localPosition = new Vector3(Random.Range(-4f, 4f) , _positionStart.y, Random.Range(0f, 6f));
+        transform.localPosition = new Vector3(Random.Range(-4f, 4f), _positionStart.y, Random.Range(0f, 6f));
         transform.rotation = Quaternion.identity;
         _rigidBody.velocity = Vector3.zero;
     }
