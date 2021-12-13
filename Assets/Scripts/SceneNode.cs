@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 public class SceneNode : MonoBehaviour
 {
     private Matrix4x4 mCombinedParentXform;
@@ -12,6 +13,7 @@ public class SceneNode : MonoBehaviour
     public bool isSelected = false;
     public float moveSen = 0.5f, rotateSen, maxAngle = 45f;
     public Matrix4x4 MCombinedParentXform { get => mCombinedParentXform; set => mCombinedParentXform = value; }
+    public Text ctrlText;
     protected void Start()
     {
         InitializeSceneNode();
@@ -22,6 +24,7 @@ public class SceneNode : MonoBehaviour
     }
     void Update()
     {
+        ctrlText.gameObject.SetActive(isSelected);
         if (isSelected)
         {
             float rotateSenTemp = 0f;
@@ -168,13 +171,13 @@ public class SceneNode : MonoBehaviour
         Quaternion temp;
         if (Input.GetKey(KeyCode.D))
         {
-            Quaternion turn = Quaternion.AngleAxis(tempSen, Vector3.up);
+            Quaternion turn = Quaternion.AngleAxis(tempSen, transform.up);
             temp = turn * transform.localRotation;
             transform.localRotation = turn * transform.localRotation;
         }
         else if (Input.GetKey(KeyCode.A))
         {
-            Quaternion turn = Quaternion.AngleAxis(-tempSen, Vector3.up);
+            Quaternion turn = Quaternion.AngleAxis(-tempSen, transform.up);
             transform.localRotation = turn * transform.localRotation;
         }
         else if (Input.GetKey(KeyCode.W))

@@ -25,7 +25,7 @@ public class Puck : MonoBehaviour
         if (slapshot) _keepInBound.enabled = false;
         else _keepInBound.enabled = true;
         if (slapshot && _rigidBody.velocity.magnitude <= float.Epsilon) ResetPuckRandom();
-        if (transform.position.y < 10f) ResetPuckRandom();
+        if (transform.position.y < -10f) ResetPuckRandom();
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -35,11 +35,11 @@ public class Puck : MonoBehaviour
             _rigidBody.AddForce(other.transform.forward * power);
             _theWorld.SlapshotAttempted();
         }
-        else if (other.gameObject.tag == "Obstacle")
-        {
-            _theWorld.SlapshotAttempted();
-            ResetPuckRandom();
-        }
+        //else if (other.gameObject.tag == "Obstacle")
+        //{
+        //    _theWorld.SlapshotAttempted();
+        //    ResetPuckRandom();
+        //}
         else if (other.gameObject.name == "GoalCollider")
         {
             _theWorld.ScoreGoal();
