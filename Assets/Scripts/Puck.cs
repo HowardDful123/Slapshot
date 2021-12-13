@@ -31,7 +31,7 @@ public class Puck : MonoBehaviour
         }
         //if (slapshot) _keepInBound.enabled = false;
         else _keepInBound.enabled = true;
-        if (slapshot && _rigidBody.velocity.magnitude <= float.Epsilon) ResetPuckAndPlayer();
+        if (slapshot && _rigidBody.velocity.magnitude <= float.Epsilon) ResetPuckRandom();
     }
     private void OnTriggerEnter(Collider other)
     {
