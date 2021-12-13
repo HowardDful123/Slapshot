@@ -6827,7 +6827,7 @@ MonoBehaviour:
   - {fileID: 8490619687593449326}
   isSelected: 0
   moveSen: 0.5
-  rotateSen: 15
+  rotateSen: 30
   maxAngle: 45
   ctrlText: {fileID: 1057344737}
 --- !u!1 &283194174
@@ -13917,7 +13917,7 @@ MonoBehaviour:
   - {fileID: 4858258060945620011}
   isSelected: 0
   moveSen: 0.5
-  rotateSen: 15
+  rotateSen: 30
   maxAngle: 20
   ctrlText: {fileID: 982310417}
 --- !u!21 &659187968
@@ -27911,7 +27911,7 @@ MonoBehaviour:
   - {fileID: 6033121396993125152}
   isSelected: 0
   moveSen: 0.5
-  rotateSen: 15
+  rotateSen: 30
   maxAngle: 45
   ctrlText: {fileID: 676988052}
 --- !u!23 &1534333262622071367

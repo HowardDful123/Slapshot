@@ -106,6 +106,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: a02011a0837b9564da1befac23d6c074, type: 3}
   - {fileID: 21300000, guid: d15c1dc2e3f25af4cbc751794f21450e, type: 3}
   - {fileID: 21300000, guid: 80a6daacc0ce1d34caa3b40fdcaf7b36, type: 3}
-  spritePerFrame: 30
+  spritePerFrame: 3
   loop: 1
   destroyOnEnd: 1

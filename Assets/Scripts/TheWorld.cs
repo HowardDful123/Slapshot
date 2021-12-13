@@ -61,7 +61,7 @@ public class TheWorld : MonoBehaviour
         while (t < num)
         {
             t += Time.deltaTime;
-            Quaternion turn = Quaternion.AngleAxis(-3, Vector3.right);
+            Quaternion turn = Quaternion.AngleAxis(-(360*Time.deltaTime*2), Vector3.right);
             TheArm.transform.localRotation = turn * TheArm.transform.localRotation;
             yield return null;
         }
